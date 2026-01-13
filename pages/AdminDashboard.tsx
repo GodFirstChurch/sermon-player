@@ -179,7 +179,6 @@ const SermonForm: React.FC<{ initialData: Sermon | null, onSave: (s: Sermon) => 
     tags: []
   });
   const [isGenerating, setIsGenerating] = useState(false);
-  const [fileCheck, setFileCheck] = useState<{ name: string; size: number } | null>(null);
 
   const generateAIContent = async () => {
     if (!formData.title || !formData.scripture) {
@@ -198,16 +197,6 @@ const SermonForm: React.FC<{ initialData: Sermon | null, onSave: (s: Sermon) => 
       tags: result.tags
     }));
     setIsGenerating(false);
-  };
-
-  const handleFileCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const f = e.target.files[0];
-      setFileCheck({
-        name: f.name,
-        size: parseFloat((f.size / (1024 * 1024)).toFixed(2))
-      });
-    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -232,8 +221,6 @@ const SermonForm: React.FC<{ initialData: Sermon | null, onSave: (s: Sermon) => 
       duration: 'Unknown'
     });
   };
-
-  const isOversized = fileCheck && fileCheck.size > 100;
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">
@@ -322,22 +309,14 @@ const SermonForm: React.FC<{ initialData: Sermon | null, onSave: (s: Sermon) => 
           <div className="border-t border-slate-100 dark:border-slate-700 pt-8 space-y-8">
             <h3 className="text-lg font-bold text-slate-900 dark:text-white brand-font uppercase border-b border-slate-100 dark:border-slate-700 pb-2">Upload Process</h3>
             
-            {/* Steps omitted for brevity in diff, but they remain visually identical */}
+            {/* Step 1 */}
             <div className="flex gap-4 items-start">
                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 font-bold flex items-center justify-center border border-slate-200 dark:border-slate-600">1</div>
                <div className="flex-1">
-                 <h4 className="font-bold text-slate-900 dark:text-white text-sm uppercase mb-1">Check File Size</h4>
-                 <div className={`relative border-2 border-dashed rounded-lg p-4 text-center transition-colors max-w-md ${isOversized ? 'border-red-300 bg-red-50 dark:bg-red-900/20' : 'border-slate-300 dark:border-slate-600 hover:border-sky-400 hover:bg-white dark:hover:bg-slate-700 bg-slate-50 dark:bg-slate-800'}`}>
-                    <input 
-                      type="file" 
-                      accept="audio/*" 
-                      onChange={handleFileCheck}
-                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                    />
-                    {!fileCheck && <p className="text-slate-500 dark:text-slate-400 text-sm">Drop file here to check size</p>}
-                    {fileCheck && !isOversized && <p className="text-green-600 dark:text-green-400 font-bold text-sm">✓ {fileCheck.size} MB (Good)</p>}
-                    {fileCheck && isOversized && <p className="text-red-600 dark:text-red-400 font-bold text-sm">⚠ {fileCheck.size} MB (Too Large)</p>}
-                 </div>
+                 <h4 className="font-bold text-slate-900 dark:text-white text-sm uppercase mb-1">File Size Check</h4>
+                 <p className="text-sm text-slate-600 dark:text-slate-400">
+                    Make sure the mp3 is below 100MB (Use <a href="https://www.audacityteam.org/" target="_blank" rel="noreferrer" className="text-sky-600 hover:underline">Audacity</a> to compress if needed).
+                 </p>
                </div>
             </div>
 
