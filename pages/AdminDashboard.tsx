@@ -175,6 +175,7 @@ const SermonForm: React.FC<{ initialData: Sermon | null, onSave: (s: Sermon) => 
     scripture: '',
     description: '',
     audioUrl: '',
+    downloadUrl: '',
     tags: []
   });
 
@@ -196,6 +197,7 @@ const SermonForm: React.FC<{ initialData: Sermon | null, onSave: (s: Sermon) => 
       scripture: formData.scripture || '',
       description: formData.description || '',
       audioUrl: formData.audioUrl!,
+      downloadUrl: formData.downloadUrl || '',
       tags: formData.tags || [],
       duration: 'Unknown'
     });
@@ -307,7 +309,7 @@ const SermonForm: React.FC<{ initialData: Sermon | null, onSave: (s: Sermon) => 
                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 font-bold flex items-center justify-center border border-slate-200 dark:border-slate-600">3</div>
                <div className="flex-1">
                  <h4 className="font-bold text-slate-900 dark:text-white text-sm uppercase mb-1">Get Direct Link</h4>
-                 <p className="text-sm text-slate-600 dark:text-slate-400">Right click on the file in Open Drive, select <strong>'Links'</strong>, then copy the <strong>'Direct Link (streaming)'</strong>.</p>
+                 <p className="text-sm text-slate-600 dark:text-slate-400">Right click on the file in Open Drive, select <strong>'Links'</strong>, then copy the <strong>'Direct Link (streaming)'</strong> and optionally the <strong>'Direct Link (download)'</strong>.</p>
                </div>
             </div>
 
@@ -316,13 +318,19 @@ const SermonForm: React.FC<{ initialData: Sermon | null, onSave: (s: Sermon) => 
                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-sky-100 dark:bg-sky-900/30 text-sky-600 dark:text-sky-400 font-bold flex items-center justify-center border border-sky-200 dark:border-sky-800">4</div>
                <div className="flex-1">
                  <h4 className="font-bold text-slate-900 dark:text-white text-sm uppercase mb-1">Enter Details & Save</h4>
-                 <div className="flex gap-2">
+                 <div className="flex flex-col gap-3">
                    <input 
                       required
                       className="w-full px-3 py-2 bg-white dark:bg-slate-700 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-600 rounded-md focus:ring-sky-500 focus:border-sky-500 font-mono text-sm"
                       placeholder="Paste 'Direct Link (streaming)' here..."
                       value={formData.audioUrl} 
                       onChange={e => setFormData({...formData, audioUrl: e.target.value})} 
+                    />
+                    <input 
+                      className="w-full px-3 py-2 bg-white dark:bg-slate-700 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-600 rounded-md focus:ring-sky-500 focus:border-sky-500 font-mono text-sm"
+                      placeholder="Paste 'Direct Link (download)' here (Optional)..."
+                      value={formData.downloadUrl} 
+                      onChange={e => setFormData({...formData, downloadUrl: e.target.value})} 
                     />
                  </div>
                </div>
