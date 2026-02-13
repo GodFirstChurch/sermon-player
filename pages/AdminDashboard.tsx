@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Sermon, AdminView } from '../types';
 import { subscribeToSermons, saveSermon, deleteSermon } from '../services/storage';
-import { generateSermonMetadata } from '../services/geminiService';
-import { ChevronLeft, SparklesIcon } from '../components/Icons';
+import { ChevronLeft } from '../components/Icons';
 
 const AdminDashboard: React.FC = () => {
   const [view, setView] = useState<AdminView>(AdminView.LOGIN);
@@ -178,26 +177,6 @@ const SermonForm: React.FC<{ initialData: Sermon | null, onSave: (s: Sermon) => 
     audioUrl: '',
     tags: []
   });
-  const [isGenerating, setIsGenerating] = useState(false);
-
-  const generateAIContent = async () => {
-    if (!formData.title || !formData.scripture) {
-      alert("Please enter a Title and Scripture first.");
-      return;
-    }
-    setIsGenerating(true);
-    const result = await generateSermonMetadata(
-      formData.title, 
-      formData.scripture, 
-      formData.preacher || 'Unknown'
-    );
-    setFormData(prev => ({
-      ...prev,
-      description: result.summary,
-      tags: result.tags
-    }));
-    setIsGenerating(false);
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -231,14 +210,6 @@ const SermonForm: React.FC<{ initialData: Sermon | null, onSave: (s: Sermon) => 
       <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6 sm:p-8 transition-colors">
         <div className="flex justify-between items-center mb-6">
            <h2 className="text-xl font-bold text-slate-900 dark:text-white brand-font uppercase">{initialData ? 'Edit Sermon' : 'Add New Sermon'}</h2>
-           <button 
-             type="button"
-             onClick={generateAIContent}
-             disabled={isGenerating || isProcessing}
-             className="flex items-center gap-2 text-sm bg-amber-50 dark:bg-amber-900/30 text-amber-700 dark:text-amber-500 px-3 py-1.5 rounded-lg hover:bg-amber-100 dark:hover:bg-amber-900/50 border border-amber-200 dark:border-amber-800 transition-colors disabled:opacity-50 font-medium"
-           >
-             {isGenerating ? 'Thinking...' : <><SparklesIcon className="w-4 h-4" /> AI Assist</>}
-           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -315,7 +286,7 @@ const SermonForm: React.FC<{ initialData: Sermon | null, onSave: (s: Sermon) => 
                <div className="flex-1">
                  <h4 className="font-bold text-slate-900 dark:text-white text-sm uppercase mb-1">File Size Check</h4>
                  <p className="text-sm text-slate-600 dark:text-slate-400">
-                    Make sure the mp3 is below 100MB (Use <a href="https://www.audacityteam.org/" target="_blank" rel="noreferrer" className="text-sky-600 hover:underline">Audacity</a> to compress if needed).
+                    Make sure the MP3 or M4A is below 100MB (Use <a href="https://www.audacityteam.org/" target="_blank" rel="noreferrer" className="text-sky-600 hover:underline">Audacity</a> to compress if needed).
                  </p>
                </div>
             </div>
