@@ -1,6 +1,6 @@
 import React from 'react';
 import { Sermon } from '../types';
-import { PlayIcon, PauseIcon, HeartIcon } from './Icons';
+import { PlayIcon, PauseIcon, HeartIcon, DownloadIcon } from './Icons';
 
 interface SermonListProps {
   sermons: Sermon[];
@@ -79,17 +79,32 @@ const SermonList: React.FC<SermonListProps> = ({
                    
                    <div className="flex flex-col items-end gap-1">
                      <span className="text-xs font-mono text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-slate-700 px-2 py-1 rounded">{sermon.date}</span>
-                     {onToggleBookmark && (
-                       <button 
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onToggleBookmark(sermon.id);
-                        }}
-                        className="p-1.5 text-slate-300 hover:text-red-500 transition-colors"
-                       >
-                         <HeartIcon className={`w-5 h-5 ${isBookmarked ? 'text-red-500' : ''}`} solid={isBookmarked} />
-                       </button>
-                     )}
+                     <div className="flex gap-1">
+                        {sermon.downloadUrl && (
+                          <a 
+                            href={sermon.downloadUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-1.5 text-slate-300 hover:text-sky-500 transition-colors"
+                            onClick={(e) => e.stopPropagation()}
+                            title="Download Sermon"
+                          >
+                            <DownloadIcon className="w-5 h-5" />
+                          </a>
+                        )}
+                        {onToggleBookmark && (
+                          <button 
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onToggleBookmark(sermon.id);
+                            }}
+                            className="p-1.5 text-slate-300 hover:text-red-500 transition-colors"
+                            title={isBookmarked ? "Remove Bookmark" : "Bookmark Sermon"}
+                          >
+                            <HeartIcon className={`w-5 h-5 ${isBookmarked ? 'text-red-500' : ''}`} solid={isBookmarked} />
+                          </button>
+                        )}
+                     </div>
                    </div>
                 </div>
                 
