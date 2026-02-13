@@ -7,6 +7,7 @@ export interface Sermon {
   scripture: string;
   description: string;
   audioUrl: string;
+  downloadUrl?: string;
   duration?: string;
   tags: string[];
 }
