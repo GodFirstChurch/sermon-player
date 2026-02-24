@@ -4,7 +4,7 @@ import Header from './components/Header';
 import Player from './components/Player';
 import PublicFeed from './pages/PublicFeed';
 import AdminDashboard from './pages/AdminDashboard';
-import { subscribeToSermons } from './services/storage';
+import { subscribeToSermons, updateSermon } from './services/storage';
 import { Sermon } from './types';
 
 const App: React.FC = () => {
@@ -14,6 +14,7 @@ const App: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [initialSeekTime, setInitialSeekTime] = useState(0);
+  const [playbackSpeed, setPlaybackSpeed] = useState<number>(1.0);
 
   // Features State
   const [bookmarks, setBookmarks] = useState<string[]>(() => {
@@ -74,6 +75,14 @@ const App: React.FC = () => {
       setCurrentSermon(sermon);
       setIsPlaying(true);
       setInitialSeekTime(0); // Reset seek time for new tracks
+
+      // Update analytics for the newly played sermon
+      const updatedSermon: Sermon = {
+        ...sermon,
+        playCount: (sermon.playCount || 0) + 1,
+        lastPlayedAt: new Date().toISOString(),
+      };
+      updateSermon(updatedSermon);
     }
   };
 
@@ -135,6 +144,8 @@ const App: React.FC = () => {
           onPlayPause={() => setIsPlaying(!isPlaying)}
           onEnded={() => setIsPlaying(false)}
           initialTime={initialSeekTime}
+          playbackSpeed={playbackSpeed}
+          onPlaybackSpeedChange={setPlaybackSpeed}
         />
       </div>
     </HashRouter>
