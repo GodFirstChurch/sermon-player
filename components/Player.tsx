@@ -8,6 +8,8 @@ interface PlayerProps {
   onPlayPause: () => void;
   onEnded: () => void;
   initialTime?: number;
+  playbackSpeed: number;
+  onPlaybackSpeedChange: (speed: number) => void;
 }
 
 const formatTime = (seconds: number) => {
@@ -22,7 +24,9 @@ const Player: React.FC<PlayerProps> = ({
   isPlaying, 
   onPlayPause, 
   onEnded,
-  initialTime = 0
+  initialTime = 0,
+  playbackSpeed,
+  onPlaybackSpeedChange
 }) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [progress, setProgress] = React.useState(0);
@@ -61,7 +65,14 @@ const Player: React.FC<PlayerProps> = ({
         }
       }
     }
-  }, [currentSermon, isPlaying, onPlayPause]);
+  }, [currentSermon, isPlaying, onPlayPause, initialTime]);
+
+  // Playback Speed Control
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.playbackRate = playbackSpeed;
+    }
+  }, [playbackSpeed]);
 
   // Persist State Logic (Throttle: 30 seconds)
   useEffect(() => {
@@ -144,6 +155,20 @@ const Player: React.FC<PlayerProps> = ({
           >
             {isPlaying ? <PauseIcon className="w-6 h-6" /> : <PlayIcon className="w-6 h-6 ml-0.5" />}
           </button>
+
+          {/* Playback Speed Dropdown */}
+          <select
+            id="playbackSpeed"
+            value={playbackSpeed}
+            onChange={(e) => onPlaybackSpeedChange(Number(e.target.value))}
+            className="ml-4 p-2 rounded-md bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-sky-500"
+          >
+            {[0.75, 1.0, 1.25, 1.5, 1.75, 2.0].map((speed) => (
+              <option key={speed} value={speed}>
+                {speed}x
+              </option>
+            ))}
+          </select>
         </div>
       </div>
     </div>
