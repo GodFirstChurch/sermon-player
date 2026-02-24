@@ -10,6 +10,8 @@ export interface Sermon {
   downloadUrl?: string;
   duration?: string;
   tags: string[];
+  playCount?: number;
+  lastPlayedAt?: string; // ISO date string
 }
 
 export interface PlayerState {
