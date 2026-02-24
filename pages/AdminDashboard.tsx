@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Sermon, AdminView } from '../types';
-import { subscribeToSermons, saveSermon, deleteSermon } from '../services/storage';
+import { subscribeToSermons, addOrUpdateSermon, deleteSermon } from '../services/storage';
 import { ChevronLeft } from '../components/Icons';
 
 const AdminDashboard: React.FC = () => {
@@ -79,7 +79,7 @@ const AdminManager: React.FC<{ setView: (v: AdminView) => void, view: AdminView 
 
   const handleSave = async (sermon: Sermon) => {
     setIsProcessing(true);
-    await saveSermon(sermon);
+    await addOrUpdateSermon(sermon);
     setIsProcessing(false);
     setView(AdminView.LIST);
   };
@@ -104,6 +104,8 @@ const AdminManager: React.FC<{ setView: (v: AdminView) => void, view: AdminView 
                 <th className="px-6 py-4">Title</th>
                 <th className="px-6 py-4 hidden sm:table-cell">Preacher</th>
                 <th className="px-6 py-4 hidden md:table-cell">Date</th>
+                <th className="px-6 py-4 hidden lg:table-cell">Plays</th>
+                <th className="px-6 py-4 hidden lg:table-cell">Last Played</th>
                 <th className="px-6 py-4 text-right">Actions</th>
               </tr>
             </thead>
@@ -116,6 +118,10 @@ const AdminManager: React.FC<{ setView: (v: AdminView) => void, view: AdminView 
                   </td>
                   <td className="px-6 py-4 text-slate-600 dark:text-slate-300 hidden sm:table-cell">{s.preacher}</td>
                   <td className="px-6 py-4 text-slate-500 dark:text-slate-400 text-sm hidden md:table-cell">{s.date}</td>
+                  <td className="px-6 py-4 text-slate-500 dark:text-slate-400 text-sm hidden lg:table-cell">{s.playCount || 0}</td>
+                  <td className="px-6 py-4 text-slate-500 dark:text-slate-400 text-sm hidden lg:table-cell">
+                    {s.lastPlayedAt ? new Date(s.lastPlayedAt).toLocaleString() : 'Never'}
+                  </td>
                   <td className="px-6 py-4 text-right space-x-2">
                     <button 
                       onClick={() => handleEdit(s)} 
@@ -140,7 +146,7 @@ const AdminManager: React.FC<{ setView: (v: AdminView) => void, view: AdminView 
               ))}
               {sermons.length === 0 && (
                 <tr>
-                  <td colSpan={4} className="px-6 py-8 text-center text-slate-500 dark:text-slate-400">
+                  <td colSpan={6} className="px-6 py-8 text-center text-slate-500 dark:text-slate-400">
                     No sermons found in database.
                   </td>
                 </tr>
