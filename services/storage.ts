@@ -19,12 +19,13 @@ import {
 // 3. Add a Web App </ >
 // 4. Copy the config object below
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY_HERE",
-  authDomain: "your-project.firebaseapp.com",
-  projectId: "your-project-id",
-  storageBucket: "your-project.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "1:123456789:web:abcdef"
+  apiKey: "AIzaSyBkW7LXDmlxBvH-XbUkzBKglYMr0O1b7Ck",
+  authDomain: "godfirst-church-barry-audio.firebaseapp.com",
+  projectId: "godfirst-church-barry-audio",
+  storageBucket: "godfirst-church-barry-audio.firebasestorage.app",
+  messagingSenderId: "653187269547",
+  appId: "1:653187269547:web:a4222782afe30d2b1a88ee",
+  measurementId: "G-8JV95QE8EQ"
 };
 
 // Initialize Firebase
