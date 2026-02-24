@@ -1,5 +1,5 @@
 {
   "name": "Copy of GodFirst Audio",
-  "description": "A mobile-friendly podcast player and management system for GodFirst Church Barry. Includes an admin dashboard for managing sermons and AI-assisted content generation.",
+  "description": "A mobile-friendly podcast player and management system for GodFirst Church Barry. Includes playback speed control, an admin dashboard for managing sermons, and AI-assisted content generation with basic analytics.",
   "requestFramePermissions": []
 }
