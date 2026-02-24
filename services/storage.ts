@@ -19,20 +19,12 @@ import {
 // 3. Add a Web App </ >
 // 4. Copy the config object below
 const firebaseConfig = {
-  apiKey: "AIzaSyBkW7LXDmlxBvH-XbUkzBKglYMr0O1b7Ck",
-
-  authDomain: "godfirst-church-barry-audio.firebaseapp.com",
-
-  projectId: "godfirst-church-barry-audio",
-
-  storageBucket: "godfirst-church-barry-audio.firebasestorage.app",
-
-  messagingSenderId: "653187269547",
-
-  appId: "1:653187269547:web:a4222782afe30d2b1a88ee",
-
-  measurementId: "G-8JV95QE8EQ"
-
+  apiKey: "YOUR_API_KEY_HERE",
+  authDomain: "your-project.firebaseapp.com",
+  projectId: "your-project-id",
+  storageBucket: "your-project.appspot.com",
+  messagingSenderId: "123456789",
+  appId: "1:123456789:web:abcdef"
 };
 
 // Initialize Firebase
@@ -67,7 +59,7 @@ export const subscribeToSermons = (callback: (sermons: Sermon[]) => void): () =>
   return unsubscribe;
 };
 
-export const saveSermon = async (sermon: Sermon): Promise<void> => {
+export const addOrUpdateSermon = async (sermon: Sermon): Promise<void> => {
   if (!isConfigured) {
     alert("Database not connected. Please update firebaseConfig in services/storage.ts");
     return;
@@ -105,6 +97,26 @@ export const deleteSermon = async (id: string): Promise<void> => {
     await deleteDoc(doc(db, COLLECTION_NAME, id));
   } catch (e) {
     console.error("Error deleting sermon: ", e);
+    throw e;
+  }
+};
+
+export const updateSermon = async (sermon: Sermon): Promise<void> => {
+  if (!isConfigured) {
+    alert("Database not connected. Please update firebaseConfig in services/storage.ts");
+    return;
+  }
+
+  try {
+    if (!sermon.id) {
+      console.error("Cannot update sermon without an ID.");
+      return;
+    }
+    const sermonRef = doc(db, COLLECTION_NAME, sermon.id);
+    // Only update the fields that are provided in the sermon object
+    await updateDoc(sermonRef, { ...sermon, updatedAt: serverTimestamp() });
+  } catch (e) {
+    console.error("Error updating sermon: ", e);
     throw e;
   }
 };
