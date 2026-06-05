@@ -129,7 +129,7 @@ const Player: React.FC<PlayerProps> = ({
       />
       <div className="max-w-4xl mx-auto p-4 flex flex-col gap-2">
         {/* Progress Bar */}
-        <div className="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400 font-medium font-mono">
+        <div className="flex items-center gap-3 text-sm text-slate-500 dark:text-slate-400 font-medium font-mono">
           <span>{formatTime(currentTime)}</span>
           <input 
             type="range" 
@@ -145,15 +145,15 @@ const Player: React.FC<PlayerProps> = ({
         {/* Controls & Info */}
         <div className="flex items-center justify-between mt-1">
           <div className="flex-1 pr-4 min-w-0">
-            <h4 className="font-semibold text-slate-900 dark:text-white truncate text-sm brand-font tracking-wide">{currentSermon.title}</h4>
-            <p className="text-xs text-slate-500 dark:text-slate-400 truncate uppercase tracking-wider">{currentSermon.preacher}</p>
+            <h4 className="font-semibold text-slate-900 dark:text-white truncate text-base lg:text-lg brand-font tracking-wide">{currentSermon.title}</h4>
+            <p className="text-sm text-slate-500 dark:text-slate-400 truncate uppercase tracking-wider">{currentSermon.preacher}</p>
           </div>
 
           <button 
             onClick={onPlayPause}
-            className="w-12 h-12 flex items-center justify-center rounded-full bg-sky-500 text-white shadow-md hover:bg-sky-600 hover:scale-105 transition-all active:scale-95 border-2 border-transparent hover:border-amber-400"
+            className="w-14 h-14 flex items-center justify-center rounded-full bg-sky-500 text-white shadow-md hover:bg-sky-600 hover:scale-105 transition-all active:scale-95 border-2 border-transparent hover:border-amber-400 flex-shrink-0"
           >
-            {isPlaying ? <PauseIcon className="w-6 h-6" /> : <PlayIcon className="w-6 h-6 ml-0.5" />}
+            {isPlaying ? <PauseIcon className="w-7 h-7" /> : <PlayIcon className="w-7 h-7 ml-0.5" />}
           </button>
 
           {/* Playback Speed Dropdown */}
@@ -161,7 +161,7 @@ const Player: React.FC<PlayerProps> = ({
             id="playbackSpeed"
             value={playbackSpeed}
             onChange={(e) => onPlaybackSpeedChange(Number(e.target.value))}
-            className="ml-4 p-2 rounded-md bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-sky-500"
+            className="ml-4 p-2.5 rounded-md bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white text-base font-medium focus:outline-none focus:ring-2 focus:ring-sky-500 appearance-none text-center min-w-[4rem]"
           >
             {[0.75, 1.0, 1.25, 1.5, 1.75, 2.0].map((speed) => (
               <option key={speed} value={speed}>
