@@ -54,15 +54,15 @@ const PublicFeed: React.FC<PublicFeedProps> = ({
            <div className="flex bg-slate-200 dark:bg-slate-700 rounded-lg p-1">
              <button 
                onClick={() => setActiveTab('all')}
-               className={`px-3 py-1 text-xs font-bold uppercase rounded-md transition-colors ${activeTab === 'all' ? 'bg-white dark:bg-slate-600 text-slate-900 dark:text-white shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}
+               className={`px-3 py-1.5 text-sm font-bold uppercase rounded-md transition-colors ${activeTab === 'all' ? 'bg-white dark:bg-slate-600 text-slate-900 dark:text-white shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}
              >
                All
              </button>
              <button 
                onClick={() => setActiveTab('saved')}
-               className={`px-3 py-1 text-xs font-bold uppercase rounded-md transition-colors flex items-center gap-1 ${activeTab === 'saved' ? 'bg-white dark:bg-slate-600 text-slate-900 dark:text-white shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}
+               className={`px-3 py-1.5 text-sm font-bold uppercase rounded-md transition-colors flex items-center gap-1 ${activeTab === 'saved' ? 'bg-white dark:bg-slate-600 text-slate-900 dark:text-white shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}
              >
-               <HeartIcon className="w-3 h-3" solid /> Saved
+               <HeartIcon className="w-4 h-4" solid /> Saved
              </button>
            </div>
         </div>
@@ -75,9 +75,9 @@ const PublicFeed: React.FC<PublicFeedProps> = ({
               placeholder="Search title or preacher..." 
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent placeholder-slate-400"
+              className="w-full pl-11 pr-4 py-3 bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent placeholder-slate-400"
             />
-            <svg className="w-5 h-5 text-slate-400 absolute left-3 top-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-5 h-5 text-slate-400 absolute left-3.5 top-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
@@ -85,7 +85,7 @@ const PublicFeed: React.FC<PublicFeedProps> = ({
           <select 
             value={selectedSeries}
             onChange={(e) => setSelectedSeries(e.target.value)}
-            className="px-4 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
+            className="px-4 py-3 bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-sky-500"
           >
             {allSeries.map(s => (
               <option key={s} value={s}>{s === 'All' ? 'All Series' : s}</option>
