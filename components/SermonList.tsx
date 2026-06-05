@@ -71,14 +71,14 @@ const SermonList: React.FC<SermonListProps> = ({
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between gap-2">
                    <div>
-                      <h3 className={`font-semibold text-lg leading-tight mb-1 brand-font uppercase ${isCurrent ? 'text-sky-600 dark:text-sky-400' : 'text-slate-800 dark:text-slate-100'}`}>
+                      <h3 className={`font-semibold text-xl leading-tight mb-1 brand-font uppercase ${isCurrent ? 'text-sky-600 dark:text-sky-400' : 'text-slate-800 dark:text-slate-100'}`}>
                         {sermon.title}
                       </h3>
-                      <p className="text-sm text-sky-500 dark:text-sky-400 font-medium">{sermon.preacher}</p>
+                      <p className="text-base text-sky-500 dark:text-sky-400 font-medium">{sermon.preacher}</p>
                    </div>
                    
                    <div className="flex flex-col items-end gap-1">
-                     <span className="text-xs font-mono text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-slate-700 px-2 py-1 rounded">{sermon.date}</span>
+                     <span className="text-sm font-mono text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-slate-700 px-2 py-1 rounded">{sermon.date}</span>
                      <div className="flex gap-1">
                         {sermon.downloadUrl && (
                           <a 
@@ -108,8 +108,8 @@ const SermonList: React.FC<SermonListProps> = ({
                    </div>
                 </div>
                 
-                <p className="text-xs text-slate-400 dark:text-slate-500 mt-1 font-bold uppercase tracking-wide">{sermon.series}</p>
-                <p className="text-sm text-slate-500 dark:text-slate-400 mt-2 line-clamp-2 leading-relaxed">{sermon.description}</p>
+                <p className="text-sm text-slate-400 dark:text-slate-500 mt-1 font-bold uppercase tracking-wide">{sermon.series}</p>
+                <p className="text-base text-slate-500 dark:text-slate-400 mt-2 line-clamp-2 leading-relaxed">{sermon.description}</p>
                 
                 <div className="flex flex-wrap gap-2 mt-3 items-center">
                    {sermon.scripture && (
@@ -118,13 +118,13 @@ const SermonList: React.FC<SermonListProps> = ({
                        target="_blank" 
                        rel="noopener noreferrer"
                        onClick={(e) => e.stopPropagation()}
-                       className="text-xs font-semibold text-sky-600 dark:text-sky-400 bg-sky-50 dark:bg-sky-900/30 px-2 py-0.5 rounded border border-sky-100 dark:border-sky-900 hover:underline hover:bg-sky-100 dark:hover:bg-sky-900/50 transition-colors flex items-center gap-1"
+                       className="text-sm font-semibold text-sky-600 dark:text-sky-400 bg-sky-50 dark:bg-sky-900/30 px-2 py-0.5 rounded border border-sky-100 dark:border-sky-900 hover:underline hover:bg-sky-100 dark:hover:bg-sky-900/50 transition-colors flex items-center gap-1"
                      >
                         📖 {sermon.scripture}
                      </a>
                    )}
                   {sermon.tags.map(tag => (
-                    <span key={tag} className="px-2 py-0.5 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-500 text-xs rounded-md border border-amber-100 dark:border-amber-900/30">#{tag}</span>
+                    <span key={tag} className="px-2 py-0.5 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-500 text-sm rounded-md border border-amber-100 dark:border-amber-900/30">#{tag}</span>
                   ))}
                 </div>
               </div>
