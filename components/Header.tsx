@@ -16,7 +16,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
       <div className="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
         <Link to="/" className="flex flex-col leading-none">
           <span className="font-bold text-slate-700 dark:text-slate-100 text-2xl brand-font tracking-tight uppercase">GodFirst</span>
-          <span className="text-sky-500 text-[0.65rem] font-bold uppercase tracking-[0.2em] -mt-0.5">Church Barry</span>
+          <span className="text-sky-500 text-[0.75rem] font-bold uppercase tracking-[0.2em] -mt-0.5">Church Barry</span>
         </Link>
         
         <div className="flex items-center gap-4">
@@ -25,16 +25,16 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
             className="p-2 text-slate-500 dark:text-slate-400 hover:text-sky-500 dark:hover:text-sky-400 transition-colors"
             aria-label="Toggle Dark Mode"
           >
-            {darkMode ? <SunIcon className="w-5 h-5" /> : <MoonIcon className="w-5 h-5" />}
+            {darkMode ? <SunIcon className="w-6 h-6" /> : <MoonIcon className="w-6 h-6" />}
           </button>
 
           <nav>
             {isAdmin ? (
-              <Link to="/" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-sky-600">
+              <Link to="/" className="text-base font-medium text-slate-600 dark:text-slate-300 hover:text-sky-600">
                 Back to Player
               </Link>
             ) : (
-              <Link to="/admin" className="text-xs px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-600 font-medium transition-colors">
+              <Link to="/admin" className="text-sm px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-600 font-medium transition-colors">
                 Admin Area
               </Link>
             )}
